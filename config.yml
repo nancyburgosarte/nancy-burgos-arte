@@ -1,0 +1,49 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "static/uploads"
+public_folder: "/uploads"
+
+publish_mode: simple
+
+locale: es
+
+collections:
+  - name: "obras"
+    label: "Obras"
+    label_singular: "Obra"
+    folder: "content/obras"
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    identifier_field: titulo
+    summary: "{{titulo}} — {{tecnica}} · {{medidas}}"
+    fields:
+      - { label: "Título de la obra", name: "titulo", widget: "string", hint: "Ej: Horizonte Quieto I" }
+      - { label: "Técnica", name: "tecnica", widget: "string", hint: "Ej: Acrílico y textura" }
+      - { label: "Medidas", name: "medidas", widget: "string", hint: "Ej: 120 × 90 cm" }
+      - { label: "Año", name: "anio", widget: "number", value_type: "int", min: 2000, max: 2099, hint: "Ej: 2024" }
+      - label: "Fotos de la obra"
+        name: "fotos"
+        widget: "list"
+        label_singular: "Foto"
+        min: 1
+        max: 8
+        field:
+          label: "Foto"
+          name: "foto"
+          widget: "image"
+          choose_url: false
+          hint: "Subí una foto de la obra. Podés agregar varias para mostrar detalles."
+      - label: "Descripción"
+        name: "descripcion"
+        widget: "text"
+        required: false
+        hint: "Descripción opcional de la obra. Se muestra al hacer clic."
+      - label: "Orden de aparición"
+        name: "orden"
+        widget: "number"
+        value_type: "int"
+        default: 99
+        hint: "Número menor = aparece primero. Ej: 1 para que sea la primera."
